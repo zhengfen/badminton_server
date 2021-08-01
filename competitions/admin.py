@@ -10,7 +10,6 @@ admin.site.register(Group)
 admin.site.register(Game)
 admin.site.register(Level)
 admin.site.register(Structure)
-admin.site.register(Team)
 admin.site.register(Type)
 admin.site.register(User)
 
@@ -18,6 +17,9 @@ admin.site.register(User)
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ('family_name', 'first_name', 'club', 'sex')
 
+@admin.register(Team)
+class TeamAdmin(admin.ModelAdmin): 
+    list_display = ('name', 'club', 'level', 'group')
 
 
 

@@ -8,5 +8,6 @@ router.register('teams', views.TeamViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('parse/responsables', views.parse_responsables),
-    path('parse/teams', views.parse_teams)
+    path('parse/teams', views.parse_teams),
+    path('process/teams', views.process_teams)
 ]

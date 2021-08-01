@@ -42,11 +42,15 @@ class ClubViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk=None):
         club = get_object_or_404(Club, pk=pk)
         club_s = ClubShowSerializer(club)
-        club_responsables = club.responsables;         
-        club_responsables_s = ClubResponsableSerializer(club_responsables, many=True)
+        responsables = club.responsables;         
+        responsables_s = ClubResponsableSerializer(responsables, many=True)
+        teams = club.teams
+        teams_s = TeamSerializer(teams, many=True)
+    
         return Response({
             'club': club_s.data, 
-            'responsables': club_responsables_s.data
+            'responsables': responsables_s.data, 
+            'teams' : teams_s.data
         })
     
 
@@ -107,6 +111,7 @@ def parse_responsables(request):
 
 def parse_teams(request):
     '''
+    get teams from excel 
     B(4, 10)  level_id 5
     B(12, 20) level_id 6
     E(12, 19) level_id 6
@@ -129,6 +134,20 @@ def parse_teams(request):
 
 
     return HttpResponse("Done")
+
+def process_teams(request):
+    '''
+    try to add club_id by comparing name
+    '''
+    teams = Team.objects.filter(club_id__isnull=True)
+    for team in teams:
+        team_name = team.name.split()[0]
+        club = Club.objects.filter(name__icontains=team_name).first()
+        if club: 
+            team.club_id = club.id
+            team.save()
+    return HttpResponse("Done")
+        
 
 
 
