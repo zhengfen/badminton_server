@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import datetime, timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 
+    'clubs',
     'competitions'
 ]
 
@@ -163,4 +165,5 @@ LOGGING = {
 }
 
 
-AUTH_USER_MODEL = 'competitions.User'
+AUTH_USER_MODEL = 'clubs.User'
+
