@@ -30,7 +30,7 @@ class ClubViewSet(viewsets.ModelViewSet):
     ordering_fields = ['name']   
     
 
-    def list(self, request):
+    def front_list(self, request):
         clubs = Club.objects.all()
         clubs_s = ClubWithStructuresSerializer(clubs, many=True)
 
@@ -41,7 +41,7 @@ class ClubViewSet(viewsets.ModelViewSet):
             'structures': structures_s.data
         })
 
-    def retrieve(self, request, pk=None):
+    def front_retrieve(self, request, pk=None):
         club = get_object_or_404(Club, pk=pk)
         club_s = ClubSerializer(club)
 
