@@ -167,3 +167,8 @@ LOGGING = {
 
 AUTH_USER_MODEL = 'clubs.User'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20
+}
+

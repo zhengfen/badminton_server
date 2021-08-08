@@ -4,16 +4,17 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 
 from clubs.models import Club, ClubResponsable, Contact, Structure, Team, User
 from clubs.serializers import ClubSerializer, ClubResponsableSerializer, ClubWithStructuresSerializer, ClubWithTeamsSerializer, StructureSerializer, TeamSerializer, TeamWithPlayerUserSerializer 
 
 from rest_framework.response import Response
 from rest_framework import viewsets, status
+from rest_framework.decorators import action
 
 
 # Create your views here.
-
 
 class ClubViewSet(viewsets.ModelViewSet):
     
@@ -25,10 +26,15 @@ class ClubViewSet(viewsets.ModelViewSet):
     }
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
-    pagination_class = None
     search_fields = ['name']
     ordering_fields = ['name']   
-    
+
+    @action(detail=False)
+    def all(self, requset):
+        queryset = Club.objects.all()
+        serializer = ClubSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
     def front_list(self, request):
         clubs = Club.objects.all()

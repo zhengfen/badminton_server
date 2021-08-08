@@ -1,19 +1,37 @@
 
 from django.http import HttpResponse
+from django.core.paginator import Paginator
+from django.conf import settings
+
 from clubs.models import Club, Team
 from clubs.serializers import TeamSerializer
 from rest_framework import viewsets
+from rest_framework.decorators import action
+
 from openpyxl import load_workbook
 import os
-from django.conf import settings
+
 
 '''
 https://www.django-rest-framework.org/tutorial/6-viewsets-and-routers/
 '''
 class TeamViewSet(viewsets.ModelViewSet):
-    queryset = Team.objects.all()
+    # queryset = Team.objects.all()
     serializer_class = TeamSerializer
     # permission_classes = [IsAdminUser, ]
+    def get_queryset(self):
+        queryset = Team.objects.all()
+        filers = ['club', 'level', 'group']
+        for filter in filers: 
+            value = self.request.query_params.get(filter)        
+            if value is not None:
+                queryset = queryset.filter(**{filter: value})
+        
+        value = self.request.query_params.get('search')
+        if value is not None:
+            queryset = queryset.filter(name__icontains=value)
+        return queryset
+
 
 def import_teams(request):
     '''
