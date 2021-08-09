@@ -2,21 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-class Structure(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-
-    class Meta:
-        db_table = 'structures'
-
-    def __str__(self):
-        return self.name
-
 
 class Club(models.Model):
     name = models.CharField(max_length=255, unique=True)
     city = models.CharField(max_length=255, blank=True, null=True)
-    structures = models.ManyToManyField(Structure, blank=True)
-
     class Meta:
         db_table = 'clubs'
         ordering = ['name']
@@ -29,15 +18,16 @@ class User(AbstractUser):
         ('M', 'Male'),
         ('F', 'Female')
     )
+    USERNAME_FIELD = 'email'
+    email = models.EmailField(unique=True, null=True, blank=True, max_length=100)
     first_name = models.CharField(null=True, blank=True, max_length=100)
-    last_name = models.CharField(null=True, blank=True, max_length=100)
-    email = models.CharField(unique=True, null=True, blank=True, max_length=100)
+    last_name = models.CharField(null=True, blank=True, max_length=100)   
     licence = models.CharField(max_length=255, unique=True, blank=True, null=True)
     sex = models.CharField(max_length=20, blank=True,
                            null=True, choices=sex_choices)
     birthday = models.DateField(blank=True, null=True)
     club = models.ForeignKey(Club, on_delete=models.PROTECT, blank=True, null=True)
-
+    REQUIRED_FIELDS = [] # removes email from REQUIRED_FIELDS
     class Meta:
         db_table = 'users'
 
@@ -78,12 +68,11 @@ class Team(models.Model):
     reference = models.CharField(
         max_length=255, unique=True, blank=True, null=True)
     club = models.ForeignKey(Club, related_name='teams',
-                             on_delete=models.PROTECT, null=True)
-    players = models.ManyToManyField(User, through='TeamPlayer', blank=True)
+                             on_delete=models.PROTECT, blank=True, null=True)
     level = models.ForeignKey('competitions.Level',
-                              on_delete=models.PROTECT, null=True)
+                              on_delete=models.PROTECT, blank=True, null=True)
     group = models.ForeignKey('competitions.Group',
-                              on_delete=models.PROTECT, null=True)
+                              on_delete=models.PROTECT, blank=True, null=True)
 
     class Meta:
         db_table = 'teams'

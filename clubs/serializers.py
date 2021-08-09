@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Club, ClubResponsable, Structure, Team, TeamPlayer, Contact, User
+from .models import Club, ClubResponsable, Team, TeamPlayer, Contact, User
 from competitions.serializers import GroupSerializer
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -12,11 +12,6 @@ class ClubSerializer(serializers.ModelSerializer):
         model = Club
         fields = '__all__'
 
-class StructureSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Structure
-        fields = '__all__'
-
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Team
@@ -25,15 +20,8 @@ class TeamSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name','licence', 'sex', 'birthday', 'club_id']
+        fields = ['id', 'first_name', 'last_name', 'is_superuser', 'is_staff', 'licence', 'sex', 'birthday', 'club_id']
 
-
-
-class ClubWithStructuresSerializer(serializers.ModelSerializer):
-    structures = StructureSerializer(many=True)
-    class Meta:
-        model = Club
-        fields = '__all__'
 
 class TeamPlayerWithUserSerializer(serializers.ModelSerializer):
     user = UserSerializer()
