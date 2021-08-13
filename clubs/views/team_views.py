@@ -1,7 +1,7 @@
 
 from django.http import HttpResponse
-from django.core.paginator import Paginator
 from django.conf import settings
+from django.shortcuts import render, get_object_or_404
 
 from clubs.models import Club, Team
 from clubs.serializers import TeamSerializer
@@ -31,6 +31,13 @@ class TeamViewSet(viewsets.ModelViewSet):
         if value is not None:
             queryset = queryset.filter(name__icontains=value)
         return queryset
+    
+    @action(detail=True)
+    def show(self, request, pk=None):
+        team = get_object_or_404(Team, pk=pk)
+        team_s = TeamSerializer(team)
+        # TODO get players
+
 
 
 def import_teams(request):

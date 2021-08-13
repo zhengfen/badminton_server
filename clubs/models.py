@@ -85,7 +85,7 @@ class TeamPlayer(models.Model):
     role can be: 'captain', 'joker'
     '''
     team = models.ForeignKey(Team, related_name='team_players', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)    
+    user = models.ForeignKey(User, related_name='teams', on_delete=models.CASCADE)    
     role = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:

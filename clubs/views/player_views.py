@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from clubs.models import Contact, Club, ClubResponsable, User
+from clubs.models import Club, ClubResponsable, Contact, User
+from clubs.serializers import PlayerWithTeamsSerializer
 from openpyxl import load_workbook
 import os
 from django.conf import settings
@@ -7,7 +8,20 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import viewsets
 
 class PlayerViewSet(viewsets.ModelViewSet): 
-    pass
+    serializer_class = PlayerWithTeamsSerializer
+    # permission_classes = [IsAdminUser, ]
+    def get_queryset(self):
+        queryset = User.objects.all()
+        filers = ['club']
+        for filter in filers: 
+            value = self.request.query_params.get(filter)        
+            if value is not None:
+                queryset = queryset.filter(**{filter: value})
+        
+        value = self.request.query_params.get('search')
+        if value is not None:
+            queryset = queryset.filter(name__icontains=value)
+        return queryset
 
 def import_responsables(request): 
     filename = os.path.join(settings.BASE_DIR, 'responsables.xlsx')

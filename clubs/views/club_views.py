@@ -15,8 +15,8 @@ from rest_framework.decorators import action, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
 
-# Create your views here.
 
+# https://www.django-rest-framework.org/tutorial/6-viewsets-and-routers/
 class ClubViewSet(viewsets.ModelViewSet):
     
     perms_map = {
