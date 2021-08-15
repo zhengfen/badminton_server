@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Club, ClubResponsable, Team, TeamPlayer, Contact, User
+from .models import Club, ClubResponsable, Contact, Position, Team, TeamPlayer, User
 from competitions.serializers import GroupSerializer, LevelSerializer
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -17,28 +17,35 @@ class TeamSerializer(serializers.ModelSerializer):
         model = Team
         fields = '__all__'
 
+class TeamPlayerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeamPlayer
+        fields = '__all__'
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'first_name', 'last_name', 'is_superuser', 'is_staff', 'licence', 'sex', 'birthday', 'club_id']
 
-
-class TeamPlayerWithUserSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+class PositionSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Position
+        fields = ['id', 'name']
+class TeamPlayerWithPlayerSerializer(serializers.ModelSerializer):
+    player = UserSerializer()
     class Meta: 
         model = TeamPlayer
-        fields = ['id', 'team_id', 'user', 'role']
+        fields = ['id', 'team', 'player', 'position']
 
 class TeamPlayerWithTeamSerializer(serializers.ModelSerializer):
     team = TeamSerializer()
     class Meta: 
         model = TeamPlayer
-        fields = ['id', 'team', 'user_id', 'role']
+        fields = ['id', 'team', 'player', 'position']
 
 class TeamWithPlayerUserSerializer(serializers.ModelSerializer):
     group = GroupSerializer()
     level = LevelSerializer()
-    team_players = TeamPlayerWithUserSerializer(many=True)
+    team_players = TeamPlayerWithPlayerSerializer(many=True)
     class Meta:
         model = Team
         fields = ['id', 'name', 'club', 'level', 'group', 'team_players']

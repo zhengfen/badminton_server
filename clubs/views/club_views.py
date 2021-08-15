@@ -45,7 +45,7 @@ class ClubViewSet(viewsets.ModelViewSet):
         responsables = club.responsables
         responsables_s = ClubResponsableSerializer(responsables, many=True)
 
-        teams = club.teams
+        teams = club.teams.order_by('name')
         teams_s = TeamWithPlayerUserSerializer(teams, many=True)
 
         return Response({

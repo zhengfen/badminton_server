@@ -7,6 +7,7 @@ from clubs.models import Club, Team
 from clubs.serializers import TeamSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from openpyxl import load_workbook
 import os
@@ -20,6 +21,9 @@ class TeamViewSet(viewsets.ModelViewSet):
     serializer_class = TeamSerializer
     # permission_classes = [IsAdminUser, ]
     def get_queryset(self):
+        '''
+        get teams by filters
+        '''
         queryset = Team.objects.all()
         filers = ['club', 'level', 'group']
         for filter in filers: 
@@ -37,6 +41,12 @@ class TeamViewSet(viewsets.ModelViewSet):
         team = get_object_or_404(Team, pk=pk)
         team_s = TeamSerializer(team)
         # TODO get players
+
+    @action(detail=False)
+    def all(self, request):
+        queryset = self.get_queryset()
+        serializer = TeamSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 

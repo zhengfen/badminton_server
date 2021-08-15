@@ -80,16 +80,24 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
+class Position(models.Model):
+    '''
+    can be: 'captain', 'extra'
+    '''
+    name = models.CharField(max_length=255, blank=True, null=True)
+    class Meta: 
+        db_table = 'positions'
+    
+    def __str__(self):
+        return self.name
 class TeamPlayer(models.Model):
-    '''
-    role can be: 'captain', 'joker'
-    '''
     team = models.ForeignKey(Team, related_name='team_players', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, related_name='teams', on_delete=models.CASCADE)    
-    role = models.CharField(max_length=255, blank=True, null=True)
+    player = models.ForeignKey(User, related_name='teams', on_delete=models.CASCADE)    
+    position = models.ForeignKey(Position, on_delete=models.PROTECT, blank=True, null=True)
 
     class Meta:
         db_table = 'team_player'
 
     def __str__(self):
         return f"{self.team.name} {self.user.first_name} {self.user.last_name}"
+

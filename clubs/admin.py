@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Club, ClubResponsable, Contact, Team, User
+from .models import Club, ClubResponsable, Contact, Position, Team, User
 # Register your models here.
+
+admin.site.register(Position)
 @admin.register(Club)
 class ClubAdmin(admin.ModelAdmin): 
     list_display = ('name', 'city')
