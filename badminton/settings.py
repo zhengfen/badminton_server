@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'clubs',
-    'competitions'
+    'competitions', 
+    'modeltrans',
+
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -176,3 +178,4 @@ REST_FRAMEWORK = {
     ],
 }
 
+LOCALES = ['en', 'fr', 'de']

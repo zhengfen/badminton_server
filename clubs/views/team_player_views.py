@@ -14,7 +14,7 @@ class TeamPlayerViewSet(viewsets.ModelViewSet):
     def create(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            team_player = TeamPlayer.objects.create(**serializer.validated_data)            
+            team_player, created = TeamPlayer.objects.get_or_create(**serializer.validated_data)            
             if 'with' in request.data.keys():                
                 if (request.data['with'] == 'team'):
                     new_serializer = TeamPlayerWithTeamSerializer

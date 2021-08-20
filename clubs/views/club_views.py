@@ -31,7 +31,7 @@ class ClubViewSet(viewsets.ModelViewSet):
     ordering_fields = ['name']   
 
     @action(detail=False)    
-    @permission_classes([IsAuthenticated])
+    # @permission_classes([IsAuthenticated])
     def all(self, requset):
         queryset = Club.objects.all()
         serializer = ClubSerializer(queryset, many=True)
