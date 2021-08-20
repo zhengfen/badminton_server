@@ -59,19 +59,53 @@ def import_teams(request):
     B(22, 29) level_id 7
     E(22, 27) level_id 7
     '''
-    filename = os.path.join(settings.BASE_DIR, 'Interclub 2020 - 2021.xlsx')
+    filename = os.path.join(settings.BASE_DIR, 'excels/Interclub 2020 - 2021.xlsx')
     wb = load_workbook(filename = filename)
     sh = wb['Equipes']
 
-    for i in range(22, 27):
-        txt = sh['E' + str(i)].value
-        if (txt): 
-            [reference, team_name] = txt.split(' ', 1)
-            # team
-            team, created = Team.objects.get_or_create(name=team_name)
-            team.reference = reference
-            team.level_id = 7
-            team.save()
+    groups= [
+        {
+            'first_column': 'B', 
+            'start':4,
+            'stop': 10,
+            'level_id': 5
+        }, 
+        {
+            'first_column': 'B', 
+            'start':12,
+            'stop': 20,
+            'level_id': 6
+        }, 
+        {
+            'first_column': 'E', 
+            'start':12,
+            'stop': 19,
+            'level_id': 6
+        }, 
+        {
+            'first_column': 'B', 
+            'start':22,
+            'stop': 29,
+            'level_id': 7
+        }, 
+        {
+            'first_column': 'E', 
+            'start':22,
+            'stop': 27,
+            'level_id': 7
+        }, 
+    ]
+
+    for group in groups:
+        for i in range(group['start'], group['stop']):
+            txt = sh[group['first_column'] + str(i)].value
+            if (txt): 
+                [reference, team_name] = txt.split(' ', 1)
+                # team
+                team, created = Team.objects.get_or_create(name=team_name)
+                team.reference = reference
+                team.level_id = group['level_id']
+                team.save()
 
 
     return HttpResponse("Done")

@@ -6,7 +6,8 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 
 from django.conf import settings
-import json 
+import logging
+logger = logging.getLogger(__name__)
 
 class LevelViewSet(viewsets.ModelViewSet):
     queryset = Level.objects.all()
@@ -18,15 +19,14 @@ class LevelViewSet(viewsets.ModelViewSet):
         serializer = LevelSerializer(queryset, many=True)
         return Response(serializer.data)
 
+    # TypeError: 'Level' object does not support item assignment
     def create(self, request):
-        # construct title value
-        name = {}
-        locales = settings.LOCALES
+        level = Level()
+        locales = settings.MODELTRANS_AVAILABLE_LANGUAGES 
         for locale in locales:
-            value = request.data['name'][locale]
-            if value:
-                name[locale] = value
-        
-        level = Level.create(name=json.dumps(name)); 
+            if 'name_' + locale in request.data.keys():           
+                value = request.data['name_' + locale]            
+                setattr(level, 'name_'  + locale, value)
+        level.save()
         return Response(self.serializer_class(level).data, status=status.HTTP_201_CREATED)
 
