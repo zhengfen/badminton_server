@@ -19,7 +19,6 @@ class LevelViewSet(viewsets.ModelViewSet):
         serializer = LevelSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    # TypeError: 'Level' object does not support item assignment
     def create(self, request):
         level = Level()
         locales = settings.MODELTRANS_AVAILABLE_LANGUAGES 

@@ -1,4 +1,8 @@
-from .Club import Club
-from .Position import Position
-from .Team import Team
+# import order matters, import foreign key classes first
+
+from .Club import *
 from .User import *
+from .ClubResponsible import *
+from .Position import *
+from .Team import *
+from .TeamPlayer import * 

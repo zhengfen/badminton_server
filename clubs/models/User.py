@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from . import Club, Team, Position
+from . import Club
 
 class User(AbstractUser):
     sex_choices = (
@@ -24,17 +24,7 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-class ClubResponsable(models.Model):
-    club = models.ForeignKey(
-        Club, related_name='responsables', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    function = models.CharField(max_length=255, blank=True, null=True)
 
-    class Meta:
-        db_table = 'club_responsible'
-
-    def __str__(self):
-        return self.club.name + '_' + self.user.username
 
 class Contact(models.Model):
     user = models.OneToOneField(
@@ -49,15 +39,3 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.user.username
-
-class TeamPlayer(models.Model):
-    team = models.ForeignKey(Team, related_name='team_players', on_delete=models.CASCADE)
-    player = models.ForeignKey(User, related_name='teams', on_delete=models.CASCADE)    
-    position = models.ForeignKey(Position, on_delete=models.PROTECT, blank=True, null=True)
-
-    class Meta:
-        db_table = 'team_player'
-        unique_together = ['team', 'player']
-
-    def __str__(self):
-        return f"{self.team.name} {self.user.first_name} {self.user.last_name}"

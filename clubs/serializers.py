@@ -21,6 +21,7 @@ class TeamPlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = TeamPlayer
         fields = '__all__'
+        
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -30,6 +31,7 @@ class PositionSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Position
         fields = ['id', 'name']
+
 class TeamPlayerWithPlayerSerializer(serializers.ModelSerializer):
     player = UserSerializer()
     class Meta: 
