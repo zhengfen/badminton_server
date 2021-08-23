@@ -74,6 +74,7 @@ class Team(models.Model):
     group = models.ForeignKey('competitions.Group',
                               on_delete=models.PROTECT, blank=True, null=True)
 
+    # players = models.ManyToManyField(User, through='TeamPlayer')
     class Meta:
         db_table = 'teams'
 
@@ -90,6 +91,7 @@ class Position(models.Model):
     
     def __str__(self):
         return self.name
+
 class TeamPlayer(models.Model):
     team = models.ForeignKey(Team, related_name='team_players', on_delete=models.CASCADE)
     player = models.ForeignKey(User, related_name='teams', on_delete=models.CASCADE)    
@@ -97,6 +99,7 @@ class TeamPlayer(models.Model):
 
     class Meta:
         db_table = 'team_player'
+        unique_together = ['team', 'player']
 
     def __str__(self):
         return f"{self.team.name} {self.user.first_name} {self.user.last_name}"
