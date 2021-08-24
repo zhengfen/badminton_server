@@ -1,14 +1,14 @@
 from django.db import models
-from modeltrans.fields import TranslationField
+import json
 
 class Level(models.Model): 
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.JSONField(blank=True, null=True)
 
-    i18n = TranslationField(fields=("name", ))
+    translatable = ['name']
 
     class Meta:
         db_table = 'levels'
-        ordering = ['name']
+        ordering = ['id']
 
     def __str__(self):
-        return self.name
+        return json.dumps(self.name)

@@ -19,13 +19,5 @@ class LevelViewSet(viewsets.ModelViewSet):
         serializer = LevelSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def create(self, request):
-        level = Level()
-        locales = settings.MODELTRANS_AVAILABLE_LANGUAGES 
-        for locale in locales:
-            if 'name_' + locale in request.data.keys():           
-                value = request.data['name_' + locale]            
-                setattr(level, 'name_'  + locale, value)
-        level.save()
-        return Response(self.serializer_class(level).data, status=status.HTTP_201_CREATED)
+
 

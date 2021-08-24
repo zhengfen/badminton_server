@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 
     'clubs',
     'competitions', 
-    'modeltrans',
 
 ]
 
@@ -180,4 +179,4 @@ REST_FRAMEWORK = {
     ],
 }
 
-MODELTRANS_AVAILABLE_LANGUAGES = ['en', 'fr', 'de']
+LOCALES = ['en', 'fr', 'de']
