@@ -5,9 +5,10 @@ from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 
 router = routers.DefaultRouter()
+
 router.register('clubs', views.ClubViewSet, basename="clubs")
+router.register('users', views.UserViewSet, basename="users")
 router.register('teams', views.TeamViewSet, basename="teams")
-router.register('players', views.PlayerViewSet, basename="players")
 router.register('positions', views.PositionViewSet, basename="positions")
 router.register('team-player', views.TeamPlayerViewSet, basename="team-player")
 

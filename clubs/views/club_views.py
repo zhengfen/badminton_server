@@ -18,22 +18,26 @@ from rest_framework.permissions import IsAuthenticated
 
 # https://www.django-rest-framework.org/tutorial/6-viewsets-and-routers/
 class ClubViewSet(viewsets.ModelViewSet):
-    
-    perms_map = {
-        'get': '*', 
-        'post': 'club_create', 
-        'put': 'club_update', 
-        'delete': 'club_delete',
-    }
-    queryset = Club.objects.all()
     serializer_class = ClubSerializer
-    search_fields = ['name']
-    ordering_fields = ['name']   
+
+    def get_queryset(self):
+        queryset = Club.objects.all()
+        filers = []
+        for filter in filers: 
+            value = self.request.query_params.get(filter)        
+            if value is not None:
+                queryset = queryset.filter(**{filter: value})
+        
+        # search
+        value = self.request.query_params.get('search')
+        if value is not None:
+            queryset = queryset.filter(name__icontains=value)
+        return queryset.order_by('-id')
 
     @action(detail=False)    
     # @permission_classes([IsAuthenticated])
     def all(self, requset):
-        queryset = Club.objects.all()
+        queryset = Club.objects.all().order_by('name')
         serializer = ClubSerializer(queryset, many=True)
         return Response(serializer.data)
 
