@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Club, ClubResponsable, Contact, Position, Team, User
+from .models import Club, ClubResponsible, Contact, Position, Team, User
 # Register your models here.
 
 admin.site.register(Position)
@@ -8,8 +8,8 @@ admin.site.register(Position)
 class ClubAdmin(admin.ModelAdmin): 
     list_display = ('name', 'city')
 
-@admin.register(ClubResponsable)
-class ClubResponsableAdmin(admin.ModelAdmin): 
+@admin.register(ClubResponsible)
+class ClubResponsibleAdmin(admin.ModelAdmin): 
     list_display = ('id', 'club', 'function', 'user')
 
 @admin.register(Contact)

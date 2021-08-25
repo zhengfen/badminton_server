@@ -17,7 +17,6 @@ class User(AbstractUser):
     birthday = models.DateField(blank=True, null=True)
     club = models.ForeignKey(Club, on_delete=models.PROTECT, blank=True, null=True)
     REQUIRED_FIELDS = [] # removes email from REQUIRED_FIELDS
-
     class Meta:
         db_table = 'users'
 
@@ -33,7 +32,6 @@ class Contact(models.Model):
     address = models.CharField(max_length=255, blank=True, null=True)
     npa = models.CharField(max_length=30, blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)
-
     class Meta:
         db_table = 'contacts'
 

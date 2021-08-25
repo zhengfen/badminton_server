@@ -5,8 +5,7 @@ class Position(models.Model):
     '''
     can be: 'captain', 'extra'
     '''
-    name = models.JSONField(blank=True, null=True)
-    
+    name = models.JSONField(blank=True, null=True)    
     class Meta: 
         db_table = 'positions'
     
