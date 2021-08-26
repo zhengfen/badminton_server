@@ -3,11 +3,10 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 
-from clubs.models import Club, ClubResponsable, Contact, Team, User
-from clubs.serializers import ClubSerializer, ClubResponsableSerializer, ClubWithTeamsSerializer, TeamSerializer, TeamWithPlayerUserSerializer 
+from clubs.models import Club, ClubResponsible, Contact, Team, User
+from clubs.serializers import ClubSerializer, ClubResponsibleSerializer, ClubWithTeamsSerializer, TeamSerializer, TeamWithPlayerUserSerializer 
 
 from rest_framework.response import Response
 from rest_framework import viewsets, status
@@ -47,7 +46,7 @@ class ClubViewSet(viewsets.ModelViewSet):
         club_s = ClubSerializer(club)
 
         responsables = club.responsables
-        responsables_s = ClubResponsableSerializer(responsables, many=True)
+        responsables_s = ClubResponsibleSerializer(responsables, many=True)
 
         teams = club.teams.order_by('name')
         teams_s = TeamWithPlayerUserSerializer(teams, many=True)

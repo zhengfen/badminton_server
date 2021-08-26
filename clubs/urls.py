@@ -14,8 +14,8 @@ router.register('team-player', views.TeamPlayerViewSet, basename="team-player")
 
 urlpatterns = [
     path('', include(router.urls)),    
-    path('excel/import/responsables', views.import_responsables),
-    path('excel/import/teams', views.import_teams),
+    path('import/responsables', views.import_responsibles),
+    path('import/teams', views.import_teams),
     path('process/teams', views.process_teams),
     path('process/users', views.process_users)
 ]

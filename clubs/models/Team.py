@@ -11,6 +11,7 @@ class Team(models.Model):
                               on_delete=models.PROTECT, blank=True, null=True)
     group = models.ForeignKey('competitions.Group',
                               on_delete=models.PROTECT, blank=True, null=True)
+    description = models.JSONField(blank=True, null=True)
 
     # players = models.ManyToManyField(User, through='TeamPlayer')
     class Meta:
