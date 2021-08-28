@@ -15,12 +15,15 @@ class ClubResponsibleAdmin(admin.ModelAdmin):
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin): 
     list_display = ('user', 'phone', 'address', 'npa', 'city')
+    search_field = ('phone', 'address', 'npa', 'city')
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin): 
     list_display = ('id', 'name', 'club', 'level', 'group')
+    search_fields = ('name',)
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin): 
-    list_display = ('id', 'first_name', 'last_name', 'sex', 'birthday', 'club')
+    list_display = ('id', 'first_name', 'last_name', 'sex', 'birthday', 'club', 'is_staff')
+    search_fields = ('first_name', 'last_name', 'email')

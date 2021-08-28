@@ -11,13 +11,17 @@ router.register('users', views.UserViewSet, basename="users")
 router.register('teams', views.TeamViewSet, basename="teams")
 router.register('positions', views.PositionViewSet, basename="positions")
 router.register('team-player', views.TeamPlayerViewSet, basename="team-player")
+router.register('contacts', views.ContactViewSet, basename="contacts")
 
 urlpatterns = [
-    path('', include(router.urls)),    
-    path('import/responsables', views.import_responsibles),
+    path('', include(router.urls)),   
+    path('club/<slug:slug>', views.club_show),
+    path('import/responsibles', views.import_responsibles),
     path('import/teams', views.import_teams),
     path('process/teams', views.process_teams),
-    path('process/users', views.process_users)
+    path('process/users', views.process_users),
+    path('process/clubs', views.process_clubs),
+    path('seed/positions', views.seed_positions), 
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

@@ -24,16 +24,3 @@ class User(AbstractUser):
         return f"{self.first_name} {self.last_name}"
 
 
-
-class Contact(models.Model):
-    user = models.OneToOneField(
-        User, related_name='contact', on_delete=models.CASCADE, null=True)
-    phone = models.CharField(max_length=100, blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    npa = models.CharField(max_length=30, blank=True, null=True)
-    city = models.CharField(max_length=100, blank=True, null=True)
-    class Meta:
-        db_table = 'contacts'
-
-    def __str__(self):
-        return self.user.username

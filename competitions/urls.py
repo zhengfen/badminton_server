@@ -8,4 +8,5 @@ router.register('groups', views.GroupViewSet, basename="group")
 urlpatterns = [
     path('', include(router.urls)),
     path('seed/levels', views.seed_levels), 
+    path('seed/groups', views.seed_groups)
 ]

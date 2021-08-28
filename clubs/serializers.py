@@ -25,12 +25,18 @@ class TeamPlayerSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'is_superuser', 'is_staff', 'licence', 'sex', 'birthday', 'club_id']
+        fields = ['id', 'first_name', 'last_name', 'email', 'is_superuser', 'is_staff', 'licence', 'sex', 'birthday', 'club']
 
 class PositionSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Position
         fields = ['id', 'name']
+
+class ContactWithUserSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    class Meta: 
+        model = Contact
+        fields = '__all__'
 
 class TeamPlayerWithPlayerSerializer(serializers.ModelSerializer):
     player = UserSerializer()
@@ -52,7 +58,7 @@ class TeamWithPlayerUserSerializer(serializers.ModelSerializer):
         model = Team
         fields = ['id', 'name', 'club', 'level', 'group', 'team_players']
 
-class PlayerWithTeamsSerializer(serializers.ModelSerializer): 
+class UserWithTeamsSerializer(serializers.ModelSerializer): 
     teams = TeamPlayerWithTeamSerializer(many=True)
     class Meta:
         model = User
@@ -68,6 +74,8 @@ class UserWithContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'first_name', 'last_name', 'email', 'contact']
+
+
 
 class ClubResponsibleSerializer(serializers.ModelSerializer):
     user = UserWithContactSerializer()

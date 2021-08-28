@@ -2,6 +2,7 @@
 
 from .Club import *
 from .User import *
+from .Contact import *
 from .ClubResponsible import *
 from .Position import *
 from .Team import *
