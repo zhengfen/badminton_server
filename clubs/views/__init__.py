@@ -1,3 +1,4 @@
+from .role_views import *
 from .club_views import *
 from .user_views import *
 from .team_views import *

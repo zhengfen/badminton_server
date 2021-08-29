@@ -6,6 +6,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 router = routers.DefaultRouter()
 
+router.register('roles', views.RoleViewSet, basename="roles")
 router.register('clubs', views.ClubViewSet, basename="clubs")
 router.register('users', views.UserViewSet, basename="users")
 router.register('teams', views.TeamViewSet, basename="teams")
@@ -22,6 +23,7 @@ urlpatterns = [
     path('process/users', views.process_users),
     path('process/clubs', views.process_clubs),
     path('seed/positions', views.seed_positions), 
+    path('seed/roles', views.seed_roles)
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from clubs.models import Position
+from clubs.models import Position, Role
 
 def seed_positions(request):
     '''
@@ -24,4 +24,29 @@ def seed_positions(request):
     for item in items:
         position = Position(name=item['name'])
         position.save()
-    return HttpResponse('Done')
+    return HttpResponse('Done seeding positions')
+
+def seed_roles(request): 
+    '''
+    seed roles table
+    '''
+    items = [
+        {
+            'name':{
+                'en':'Admin', 
+                'fr':'Admin', 
+                'de':'Admin'
+            }
+        }, 
+        {
+            'name':{
+                'en':'Club admin', 
+                'fr':'Club admin', 
+                'de':'Club admin'
+            }
+        }
+    ]
+    for item in items: 
+        role = Role(name=item['name'])
+        role.save()
+    return HttpResponse('Done seeding roles')
