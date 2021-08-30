@@ -15,7 +15,7 @@ def seed_pages(request):
         }, 
         {
             'title':{
-                'en':'Commitee', 
+                'en':'Committee', 
                 'fr':'Comité', 
                 'de':'Komitee'
             }

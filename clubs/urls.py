@@ -13,6 +13,7 @@ router.register('teams', views.TeamViewSet, basename="teams")
 router.register('positions', views.PositionViewSet, basename="positions")
 router.register('team-player', views.TeamPlayerViewSet, basename="team-player")
 router.register('contacts', views.ContactViewSet, basename="contacts")
+router.register('committee', views.CommitteeViewSet, basename="committee")
 
 urlpatterns = [
     path('', include(router.urls)),   

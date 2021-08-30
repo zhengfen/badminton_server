@@ -7,4 +7,4 @@ from .ClubResponsible import *
 from .Position import *
 from .Team import *
 from .TeamPlayer import * 
-from .Member import *
+from .Committee import *
