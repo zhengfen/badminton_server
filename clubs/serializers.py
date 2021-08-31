@@ -53,6 +53,18 @@ class CommitteeWithUserSerializer(serializers.ModelSerializer):
         model = Committee
         fields = '__all__'
 
+# for committee
+class UserWithContactSerializer(serializers.ModelSerializer):
+    contact = ContactSerializer()
+    class Meta: 
+        model = User
+        fields = ['id', 'first_name', 'last_name', 'email', 'licence', 'sex', 'birthday', 'club', 'contact']
+class CommitteeWithUserContactSerializer(serializers.ModelSerializer):
+    user = UserWithContactSerializer()
+    class Meta: 
+        model = Committee
+        fields = '__all__'
+
 class TeamPlayerWithPlayerSerializer(serializers.ModelSerializer):
     player = UserSerializer()
     class Meta: 

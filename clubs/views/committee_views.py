@@ -1,5 +1,5 @@
 from clubs.models import Committee
-from clubs.serializers import CommitteeSerializer, CommitteeWithUserSerializer
+from clubs.serializers import CommitteeSerializer, CommitteeWithUserSerializer, CommitteeWithUserContactSerializer
 
 from rest_framework import viewsets, status
 from rest_framework.response import Response
@@ -28,7 +28,7 @@ class CommitteeViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def all(self, request):
-        serializer = CommitteeSerializer(self.queryset, many=True)
+        serializer = CommitteeWithUserContactSerializer(self.queryset, many=True)
         return Response(serializer.data)
 
     def list(self, request, *args, **kwargs):
