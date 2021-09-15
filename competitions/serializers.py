@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Competition, Game, Group, Level, Type
+from .models import Interclub, Game, Group, Level, Type
 
 class LevelSerializer(serializers.ModelSerializer):
     class Meta:

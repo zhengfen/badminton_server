@@ -1,0 +1,101 @@
+[
+    {
+        "model": "cms.Page",
+        "pk": 1,
+        "fields": {
+            "title": {
+                "en": "Home",
+                "fr": "Accueil",
+                "de": "Startseite"
+            }
+        }
+    },
+    {
+        "model": "cms.Page",
+        "pk": 2,
+        "fields": {
+            "title": {
+                "en": "Committee",
+                "fr": "Comité",
+                "de": "Komitee"
+            }
+        }
+    },
+    {
+        "model": "cms.Page",
+        "pk": 3,
+        "fields": {
+            "title": {
+                "en": "Clubs",
+                "fr": "Clubs",
+                "de": "Vereine"
+            }
+        }
+    },
+    {
+        "model": "cms.Page",
+        "pk": 4,
+        "fields": {
+            "title": {
+                "en": "Interclub",
+                "fr": "Interclub",
+                "de": "Interclub"
+            }
+        }
+    },
+    {
+        "model": "cms.Page",
+        "pk": 5,
+        "fields": {
+            "title": {
+                "en": "Tournaments",
+                "fr": "Tournois",
+                "de": "Turniere"
+            }
+        }
+    },
+    {
+        "model": "cms.Page",
+        "pk": 6,
+        "fields": {
+            "title": {
+                "en": "Tournaments",
+                "fr": "Photo gallery",
+                "de": "Photogalerie"
+            }
+        }
+    },
+    {
+        "model": "cms.Page",
+        "pk": 7,
+        "fields": {
+            "title": {
+                "en": "General assembly",
+                "fr": "Assemblée générale",
+                "de": "Generalversammlung"
+            }
+        }
+    },
+    {
+        "model": "cms.Page",
+        "pk": 8,
+        "fields": {
+            "title": {
+                "en": "Press",
+                "fr": "Presse",
+                "de": "Presse"
+            }
+        }
+    },
+    {
+        "model": "cms.Page",
+        "pk": 9,
+        "fields": {
+            "title": {
+                "en": "Contact",
+                "fr": "Contact",
+                "de": "Kontakt"
+            }
+        }
+    }
+]

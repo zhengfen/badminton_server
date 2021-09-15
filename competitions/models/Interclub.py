@@ -1,7 +1,7 @@
 from django.db import models
 from . import Level, Group
 
-class Competition(models.Model):
+class Interclub(models.Model):
     '''
     Competition between clubs
     '''

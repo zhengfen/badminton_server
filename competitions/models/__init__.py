@@ -4,5 +4,5 @@
 from .Level import Level
 from .Group import Group
 from .Type import Type
-from .Competition import *
+from .Interclub import *
 from .Game import Game
