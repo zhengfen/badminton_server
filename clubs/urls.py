@@ -23,8 +23,6 @@ urlpatterns = [
     path('process/teams', views.process_teams),
     path('process/users', views.process_users),
     path('process/clubs', views.process_clubs),
-    path('seed/positions', views.seed_positions), 
-    path('seed/roles', views.seed_roles)
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

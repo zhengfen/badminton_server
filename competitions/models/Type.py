@@ -4,10 +4,10 @@ class Type(models.Model):
     '''
     double men, double women, single man, single woman, double mix
     '''
-    name = models.CharField(max_length=100)
+    name = models.JSONField(blank=True, null=True)
     class Meta:
         db_table = 'types'
-        ordering = ['name']
+        ordering = ['id']
 
     def __str__(self): 
         return self.name

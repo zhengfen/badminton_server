@@ -1,0 +1,24 @@
+[
+    {
+        "model": "clubs.role",
+        "pk": 1,
+        "fields": {
+            "name": {
+                "en": "Site administrator",
+                "fr": "Administrateur du site",
+                "de": "Website-Administrator"
+            }
+        }
+    },
+    {
+        "model": "clubs.role",
+        "pk": 2,
+        "fields": {
+            "name": {
+                "en": "Club administrator",
+                "fr": "Administrateur de club",
+                "de": "Klub-Verwaltung"
+            }
+        }
+    }
+]

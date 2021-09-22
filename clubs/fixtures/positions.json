@@ -1,0 +1,24 @@
+[
+    {
+        "model": "clubs.position",
+        "pk": 1,
+        "fields": {
+            "name": {
+                "en": "Captain",
+                "fr": "Capitaine",
+                "de": "Kapitän"
+            }
+        }
+    },
+    {
+        "model": "clubs.position",
+        "pk": 2,
+        "fields": {
+            "name": {
+                "en": "Substitute",
+                "fr": "Remplaçant",
+                "de": "Ersatz"
+            }
+        }
+    }
+]
